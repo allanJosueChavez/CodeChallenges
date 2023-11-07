@@ -1,20 +1,19 @@
 const { readFileSync } = require("fs");
 
-const contents = readFileSync("./message_01.txt", "utf-8");
-const totalWords = contents.split(" ");
+const txtContent = readFileSync("./message_01.txt", "utf-8");
+
+const totalWords = txtContent.split(" ");
 
 let words = []
 let counters = []
 let result = ''
 
-totalWords.map((word) => {
-    if (!words.includes(word)){
-        console.log(word)
+for(word of totalWords){
+    if(!words.includes(word)){
         words.push(word)
     }
-})
-
-words.map((word, index)=> {
+}
+words.forEach((word, index)=> {
     counters.push(0)
     totalWords.forEach((originalWord) =>{
         if(word == originalWord){
@@ -23,8 +22,9 @@ words.map((word, index)=> {
     })    
 })
 
-words.map((word, index)=>{
-    result = result + word + counters[index]
-})
+for(let index = 0; index < words.length; index++){
+    result = result + words[index] + counters[index]
+}
 
-console.log(result)
+
+console.log("The result is: ", result);
