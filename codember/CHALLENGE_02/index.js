@@ -25,7 +25,7 @@ function getHiddenMessage(){
             case print:
                 initialValue = initialValue.toString();
                 console.log(initialValue);
-                hiddenMessage += initialValue; // Use the += operator to concatenate strings
+                hiddenMessage += initialValue;
               break;
             default:
               console.log(`The symbol is invalid`);
