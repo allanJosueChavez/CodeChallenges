@@ -3,10 +3,9 @@ const { readFileSync } = require("fs");
 const txtContent = readFileSync("./encryption_policies.txt", "utf-8");
 
 let passwords = txtContent.split("\n");
-let invalidPasswords = [];
-
 function findInvalidFortySecondPassword() {
-  passwords = passwords.map((password) => {
+  let invalidPasswords = []
+   passwords.forEach((password) => {
     const itemSplited = password.split(":");
     const policy = itemSplited[0];
     const pass = itemSplited[1].trim();
@@ -19,9 +18,14 @@ function findInvalidFortySecondPassword() {
     if (!passwordValid) {
       invalidPasswords.push(pass);
     }
-  });
+    console.log("INVALID PASSWORDS: ", invalidPasswords.length);
+    if(invalidPasswords.length === 42){
+      return
+    } 
+  })
   console.log("SOLUTION:")
-  console.log("The forty second invalid password is:", invalidPasswords[42]);
+  console.log("The forty second invalid password is:", invalidPasswords[42]  );
+  
 }
 
 findInvalidFortySecondPassword()
