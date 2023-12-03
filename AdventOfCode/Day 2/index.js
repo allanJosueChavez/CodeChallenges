@@ -9,9 +9,14 @@ function determinePossibleGames(games){
     let gamesIdsSum = 0
     let possibleGames = []
    
-    games.forEach(game =>{
+    games.forEach((game, index) =>{
+        if(index === 98){
+        console.log("index ", index)
+            
+      
         const gameNumber = game.split(":")[0]
         const gameId = parseInt(gameNumber.split(" ")[1])
+        console.log("gameId ",gameId)
         const gameCubesInfo =  game.split(":")[1]
         const subsets = gameCubesInfo.split(";")
         const cubesColors = ['green', 'red', 'blue']
@@ -22,14 +27,18 @@ function determinePossibleGames(games){
         ]
         // console.log("------")
         subsets.forEach(subset => {
-
+            console.log(subset)
 
             const cubesInfo = subset.split(",")
+            console.log(cubesInfo)
             cubesColors.forEach(color =>{
+
                 cubesInfo.forEach(cubeInfo =>{
+                    console.log(cubeInfo)
                 if(cubeInfo.includes(color)){
                    let cubeNumber = parseInt(cubeInfo.split(" ")[1])
                    const colorObject = cubesCountPerColor.find(obj => obj.color === color);
+                   
                    if (colorObject) {
                        colorObject.count += cubeNumber;
                    }
@@ -48,16 +57,17 @@ function determinePossibleGames(games){
           ) {
             
             gamesIdsSum = gameId +gamesIdsSum
-            possibleGames.push(cubesCountPerColor)
+            possibleGames.push({cubesCountPerColor, gameId})
         }else{
             // console.log("impossible gameid: ", gameId)
             // console.log(cubesCountPerColor)
         }
-       
+    }
     })
  
     console.log("The sum of the possible games ids is: ", gamesIdsSum)
     console.log("The number of possible games is: ",possibleGames.length)
+    console.log("The possible games are: ",possibleGames)
 }
 
 determinePossibleGames(games)
