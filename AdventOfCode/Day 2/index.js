@@ -10,7 +10,7 @@ function determinePossibleGames(games){
     let possibleGames = []
     console.log()
     games.forEach((game, index) =>{
-        if(index === 98){
+        // if(index === 98){
         console.log("index ", index)
             
       
@@ -62,7 +62,7 @@ function determinePossibleGames(games){
             // console.log("impossible gameid: ", gameId)
             // console.log(cubesCountPerColor)
         }
-    }
+    // }
     })
  
     console.log("The sum of the possible games ids is: ", gamesIdsSum)
