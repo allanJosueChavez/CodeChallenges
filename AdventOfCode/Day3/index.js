@@ -5,6 +5,8 @@ const schematics = inputContent.split("\n");
 
 function determineAdjacentNumbers(schematics) {
   let partNumbersSum = 0;
+  const noValidPartNumbers = [];
+  const validPartNumbers = [];
   const schematicsArrays = schematics.map((schematic) => {
     schematic = schematic.split("");
 
@@ -13,6 +15,7 @@ function determineAdjacentNumbers(schematics) {
 
   schematicsArrays.forEach((schematicArray, index) => {
     const arrayIndex = index;
+    // if(arrayIndex  < 20){
     let partNumber = "";
     console.log(schematicArray, "");
     schematicArray.forEach((character, index) => {
@@ -24,11 +27,6 @@ function determineAdjacentNumbers(schematics) {
         partNumber = partNumber + character;
       } else {
         // If it's not a number, reset the partNumber
-        // console.log("partNumber", partNumber);
-        const nextCharacter = schematicArray[index + 1];
-        const nextCharacterIsNumber = !isNaN(nextCharacter);
-        const previousCharacter = schematicArray[index - 1];
-        const previousCharacterIsNumber = !isNaN(previousCharacter);
         // characterLength is a variable to store the number of digits of the partNumber
         const characterLength = partNumber.length;
 
@@ -160,14 +158,30 @@ function determineAdjacentNumbers(schematics) {
             console.log("- - - - - ");
 
             partNumbersSum = partNumbersSum + parseInt(partNumber);
+            validPartNumbers.push(partNumber)
           }
+        }else{
+ 
+            if (parseInt(partNumber) > 0) {
+              console.log(
+                "+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + NO VALID PART NUMBER",
+                partNumber
+              )
+              noValidPartNumbers.push(partNumber)
+            }
+              
         }
+      
         partNumber = "";
       }
     });
+  // }
   });
   // console.log(schematicsArrays)
   console.log("The sum of the part numbers is: ", partNumbersSum);
+  console.log("The valid part numbers are: ", validPartNumbers);
+  console.log("The no valid part numbers are: ", noValidPartNumbers);
+
 }
 
 function isSymbol(character) {
