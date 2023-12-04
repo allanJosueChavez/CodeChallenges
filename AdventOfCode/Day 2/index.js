@@ -8,7 +8,7 @@ const games = inputContent.split("\n");
 function determinePossibleGames(games){
     let gamesIdsSum = 0
     let possibleGames = []
-   
+    console.log()
     games.forEach((game, index) =>{
         if(index === 98){
         console.log("index ", index)
