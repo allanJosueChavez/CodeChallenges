@@ -17,12 +17,12 @@ function determineAdjacentNumbers(schematics) {
     const arrayIndex = index;
     // if(arrayIndex  < 20){
     let partNumber = "";
-    console.log(schematicArray, "");
+    // console.log(schematicArray, "");
     schematicArray.forEach((character, index) => {
       const characterIndex = index;
 
-      // if character is a number
-      if (!isNaN(character) && character !== ".") {
+      // if character is a number and is different than dot AND is not the last character of the array
+      if (!isNaN(character) && character !== "." && characterIndex !== schematicArray.length - 1) {
         // If it's a number concat it with the next one
         partNumber = partNumber + character;
       } else {
@@ -163,10 +163,10 @@ function determineAdjacentNumbers(schematics) {
         }else{
  
             if (parseInt(partNumber) > 0) {
-              console.log(
-                "+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + NO VALID PART NUMBER",
-                partNumber
-              )
+              // console.log(
+              //   "+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + NO VALID PART NUMBER",
+              //   partNumber
+              // )
               noValidPartNumbers.push(partNumber)
             }
               
@@ -179,8 +179,8 @@ function determineAdjacentNumbers(schematics) {
   });
   // console.log(schematicsArrays)
   console.log("The sum of the part numbers is: ", partNumbersSum);
-  console.log("The valid part numbers are: ", validPartNumbers);
-  console.log("The no valid part numbers are: ", noValidPartNumbers);
+  // console.log("The valid part numbers are: ", validPartNumbers);
+  // console.log("The no valid part numbers are: ", noValidPartNumbers);
 
 }
 
