@@ -12,7 +12,9 @@ function determinePossibleGames(games){
     games.forEach((game, index) =>{
         // if(index === 98){
         console.log("index ", index)
-            
+        // The error here is that the validation must not be counting the total cubes per subset. instead it must consider the amount per subset and the total amount of cubes per color.
+        // The sum  of cubes in the subset then is useless at the moment, because it shouldn't be considered in the validation.
+        
       
         const gameNumber = game.split(":")[0]
         const gameId = parseInt(gameNumber.split(" ")[1])
