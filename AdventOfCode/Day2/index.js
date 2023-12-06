@@ -12,51 +12,34 @@ function determinePossibleGames(games) {
 
   let gamesIdsSum = 0;
   let possibleGames = [];
-  let gamesAssessment = [];
-  gamesAssessment = games.map((game) => {
-    game = [];
-    return game;
-  });
-  games.forEach((game, index) => {
-    const gameIndex = index;
+  games.forEach((game) => {
     // The error here is that the validation must not be counting the total cubes per subset. instead it must consider the amount per subset and the total amount of cubes per color.
     // The sum  of cubes in the subset then is useless at the moment, because it shouldn't be considered in the validation.
     const gameNumber = game.split(":")[0];
     const gameId = parseInt(gameNumber.split(" ")[1]);
-    console.log("gameId ", gameId);
     const gameCubesInfo = game.split(":")[1];
     const subsets = gameCubesInfo.split(";");
     let subsetsAssessment = [];
     // All subsets must meet the minimum amount of cubes per color. If so then add the gameId to the sum of possible games ids.
-    subsets.forEach((subset, index) => {
+    subsets.forEach((subset) => {
       const cubesInfo = subset.split(",");
       let cubesCountAssessment = [];
-      cubesInfo.forEach((cubeInfo, index) => {
-        const cubeIndex = index;
+      cubesInfo.forEach((cubeInfo) => {
         const NUMBERREGEX = /\d+/g;
         const LETTERSREGEX = /[a-z]/g;
         const amount = parseInt(cubeInfo.match(NUMBERREGEX));
         const color = cubeInfo.match(LETTERSREGEX).join("");
-        const colorObject = cubesRules.find((obj) => obj.color === color);
+        const colorObject = cubesRules.find((rule) => rule.color === color);
         if (colorObject) {
-        console.log("colorObject ", colorObject);
             cubesCountAssessment.push(amount <= colorObject.min);
         }
-        // if (color === "red") {
-        //   cubesCountAssessment.push(amount <= 12);
-        // }
-        // if (color === "green") {
-        //   cubesCountAssessment.push(amount <= 13);
-        // }
-        // if (color === "blue") {
-        //   cubesCountAssessment.push(amount <= 14);
-        // }
       });
       const subsetAssessment = cubesCountAssessment.every(
         (item) => item === true
       );
       subsetsAssessment.push(subsetAssessment);
     });
+    // Every function is used to check if all the array elements meet the condition.
     const gameAssessment = subsetsAssessment.every((item) => item === true);
     if (gameAssessment) {
       gamesIdsSum = gameId + gamesIdsSum;
