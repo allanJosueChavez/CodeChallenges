@@ -42,7 +42,7 @@ function rankHandsAndCalculateWinnings(){
     })
     const typesQuantity = 7
     for(let type = 1; type<=typesQuantity; type++){
-        console.log(handsOrderedByType[type].hands);
+        // console.log(handsOrderedByType[type].hands);
         handsOrderedByType[type].hands = sortByCardsValue(handsOrderedByType[type].hands)
     }
     for(let type = 1; type<=typesQuantity; type++){
@@ -51,15 +51,17 @@ function rankHandsAndCalculateWinnings(){
              rankedCards.push(handSet)
         })
     }
-    const totalWinnings = calculateTotalWinnings(rankedCards)
+    console.log(rankedCards)
+    const reversedArray = rankedCards.reverse()
+    const totalWinnings = calculateTotalWinnings(reversedArray)
     console.log("The total winnings are: ", totalWinnings);
 }
 
 function calculateTotalWinnings(rankedCards){
     // console.log(rankedCards)
-     let totalWinnings = 0;
+    let totalWinnings = 0;
         rankedCards.forEach((handSet, index)=>{
-            console.log("ranking: ", index+1)
+            // console.log("ranking: ", index+1)
             const bid = handSet[1]
             const multiplier = index + 1
             const winnings = bid * multiplier
