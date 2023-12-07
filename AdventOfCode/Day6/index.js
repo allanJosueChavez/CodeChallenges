@@ -1,6 +1,4 @@
 const { readFileSync } = require("fs");
-const { parse } = require("path");
-
 const txtContent = readFileSync("./input.txt", "utf-8");
 // Rule is simple. I need to beat the specified distance.
 // For that I need to calculate the time I press the button, that time is the speed my boat is going to run when I release it and the distance must be enough to win in the specified time.
@@ -31,14 +29,40 @@ function determineWaysToWin() {
   });
   races.forEach((race, index) => {
     let waysToWin = 0;
-    for (let second = 0; second <= race.time; second++) {
+ 
+    // 10 = (7 - 2) * 2
+    // 10 = (7 - x )* x
+    // 10 = 7x - x^2
+    // x^2 - 7x + 10 = 0
+    // x = (-b +- sqrt(b^2 - 4ac))/2a
+    // b is the time
+    // a is 1
+    // c is the distance
+    const time = race.time;
+    const distance = race.distance;
+    
+    let rangeStart = (-time + Math.sqrt(Math.pow(time, 2) - 4 * distance)) / 2;
+    rangeStart = (-1) * rangeStart;
+    rangeStart = Math.round(rangeStart);
+    console.log("Range Start:", rangeStart);
+    
+    let result = (time + 1) - (2 * (rangeStart + 1));
+    console.log("Ways to win (formula):", result);
+    
+    
+    // 10 is the distance wanted. 7 is the time. 2 is the time I press the button. And 5 is the time I release the button.
+    // Formula replaced with variables. startRange must be the time I press the button.
+    let startRange = race.distance +1;
+    for (let second = 1; second <= race.time; second++) {
       const remainingTime = race.time - second;
       const feasible = second * remainingTime > race.distance;
+      console.log("distance", second,second * remainingTime)
       if (feasible) {
         waysToWin++;
       }
     }
     multipliedWays = multipliedWays * waysToWin;
+    console.log("Ways to win,", waysToWin)
   });
   console.log("The multiplied ways to beat the 3 races are:", multipliedWays);
 }
@@ -69,3 +93,4 @@ function waysToWinSingleRace() {
 }
 
 waysToWinSingleRace();
+ 
