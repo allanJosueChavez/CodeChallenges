@@ -192,4 +192,15 @@ function isSymbol(character) {
   return false;
 }
 
+
+// Part two
+// 1. I gotta find number and then start evaluating
+// Evaluate: leftside, rightside, just below not above. 
+// Evaluate what? If there's any gear represented by a (*) 
+// Then find in those place if there's a gear if any. Evaluate if there's some number adjacent to the symbol. If any number
+// If any multiply both numbers and add it to the sum
+
+
+
+
 determineAdjacentNumbers(schematics);
